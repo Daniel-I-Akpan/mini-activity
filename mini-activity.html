@@ -23,7 +23,7 @@
     <textarea id="inputText" placeholder="Enter your text here..."></textarea
     ><br />
     <label for="minLength">Minimum word length: </label>
-    <input type="number" id="minLength" value="3" /><br />
+    <input type="number" id="minLength" value="4" /><br />
     <button onclick="calculateWordCount()">Count Words</button>
     <div id="result"></div>
 
@@ -46,7 +46,6 @@
           minLenWords,
         };
       }
-
       function calculateWordCount() {
         const textarea = document.getElementById("inputText");
         const minLength = parseInt(document.getElementById("minLength").value);
