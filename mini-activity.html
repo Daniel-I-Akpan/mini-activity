@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Count</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      textarea {
+        width: 100%;
+        height: 100px;
+      }
+      #result {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Word Count Tool</h1>
+    <textarea id="inputText" placeholder="Enter your text here..."></textarea
+    ><br />
+    <label for="minLength">Minimum word length: </label>
+    <input type="number" id="minLength" value="3" /><br />
+    <button onclick="calculateWordCount()">Count Words</button>
+    <div id="result"></div>
+
+    <script>
+      function countWords(text, minWordLength = 3) {
+        const words = text
+          .split(/\s+/)
+          .filter((word) => word.length >= minWordLength);
+        const wordCount = words.length;
+
+        const maxLen = Math.max(...words.map((w) => w.length));
+        const minLen = Math.min(...words.map((w) => w.length));
+
+        const maxLenWords = words.filter((word) => word.length === maxLen);
+        const minLenWords = words.filter((word) => word.length === minLen);
+
+        return {
+          wordCount,
+          maxLenWords,
+          minLenWords,
+        };
+      }
+
+      function calculateWordCount() {
+        const textarea = document.getElementById("inputText");
+        const minLength = parseInt(document.getElementById("minLength").value);
+        const text = textarea.value;
+
+        const result = countWords(text, minLength);
+        document.getElementById("result").innerHTML = `
+                <p>Word Count: ${result.wordCount}</p>
+                <p>Longest Words: ${result.maxLenWords.join(", ")}</p>
+                <p>Shortest Words: ${result.minLenWords.join(", ")}</p>
+            `;
+      }
+    </script>
+  </body>
+</html>
